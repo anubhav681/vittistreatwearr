@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VITTI STREETWEAR · black aesthetic</title>
+  <!-- Font Awesome for icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000000;
+      color: #e0e0e0;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar — aesthetic dark */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a2a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3d3d3d;
+    }
+
+    /* reoccurring animations */
+    @keyframes fadeGlow {
+      0% { opacity: 0.8; text-shadow: 0 0 3px #ffffff10; }
+      50% { opacity: 1; text-shadow: 0 0 18px #f0f0f070, 0 0 8px #aaaaaa; }
+      100% { opacity: 0.8; text-shadow: 0 0 3px #ffffff10; }
+    }
+
+    @keyframes floatVertical {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes skewReveal {
+      0% { opacity: 0; transform: skewX(10deg) translateX(-30px); filter: blur(6px); }
+      60% { opacity: 0.8; transform: skewX(-2deg) translateX(4px); filter: blur(1px); }
+      100% { opacity: 1; transform: skewX(0deg) translateX(0); filter: blur(0); }
+    }
+
+    @keyframes grainMove {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 20% 30%; }
+    }
+
+    /* noise overlay */
+    .noise-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.12;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4yIiAvPjwvc3ZnPg==');
+      animation: grainMove 6s infinite alternate;
+    }
+
+    /* layout containers */
+    .site-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ----- HEADER (neon / animated) ----- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid #1f1f1f;
+      margin-bottom: 2.5rem;
+      animation: skewReveal 0.9s ease-out;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #f0f0f0, #a0a0a0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transition: all 0.3s;
+      animation: fadeGlow 4s infinite;
+    }
+    .logo span {
+      font-weight: 300;
+      color: #4a4a4a;
+      font-size: 1.4rem;
+    }
+
+    .nav ul {
+      display: flex;
+      gap: 2.8rem;
+      list-style: none;
+    }
+    .nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 400;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+      position: relative;
+      padding: 0.3rem 0;
+      transition: color 0.3s;
+    }
+    .nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: #aaaaaa;
+      transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .nav a:hover {
+      color: white;
+    }
+    .nav a:hover::before {
+      width: 100%;
+    }
+
+    /* HERO section — lots of animation */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 3rem;
+      margin: 4rem 0 7rem 0;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      animation: skewReveal 1s;
+    }
+    .hero-line {
+      display: block;
+      overflow: hidden;
+    }
+    .hero-line span {
+      display: inline-block;
+      animation: floatVertical 5s infinite ease-in-out;
+      animation-delay: calc(0.1s * var(--i));
+    }
+    .hero-glow {
+      color: #a0a0a0;
+      text-shadow: 0 0 15px #7a7a7a80;
+    }
+    .hero-desc {
+      font-size: 1.2rem;
+      color: #9a9a9a;
+      margin: 1.8rem 0;
+      border-left: 4px solid #2a2a2a;
+      padding-left: 1.5rem;
+      animation: fadeGlow 6s infinite;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .btn {
+      background: transparent;
+      border: 1.5px solid #3d3d3d;
+      color: #f0f0f0;
+      padding: 1rem 2.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border-radius: 0px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #2a2a2a;
+      transition: left 0.5s;
+      z-index: -1;
+    }
+    .btn:hover {
+      border-color: #7a7a7a;
+      color: white;
+    }
+    .btn:hover::before {
+      left: 0;
+    }
+    .btn-outline {
+      background: #0d0d0d;
+      border-color: #4d4d4d;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .floating-box {
+      width: 380px;
+      height: 440px;
+      background: linear-gradient(145deg, #0f0f0f, #1b1b1b);
+      border: 1px solid #292929;
+      box-shadow: 0 20px 50px -10px #000000dd, 0 0 0 1px #2e2e2e inset;
+      transform: rotate(3deg) skew(-3deg);
+      transition: transform 0.6s;
+      animation: floatVertical 7s infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .floating-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .floating-box i, .floating-box .mini-text {
+      position: relative;
+      z-index: 2;
+    }
+    .floating-box i {
+      font-size: 4rem;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255,255,255,0.5);
+      transition: all 0.3s;
+    }
+    .floating-box:hover i {
+      color: #ffffff;
+      text-shadow: 0 0 30px white;
+      transform: scale(1.1);
+    }
+    .floating-box .mini-text {
+      letter-spacing: 5px;
+      font-weight: 300;
+      color: #ffffff;
+      background: rgba(0,0,0,0.6);
+      padding: 0.5rem 1rem;
+    }
+
+    /* MARQUEE (animated track) */
+    .marquee-section {
+      margin: 5rem 0;
+      border-top: 1px solid #1d1d1d;
+      border-bottom: 1px solid #1d1d1d;
+      padding: 1.2rem 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: scrollMarquee 25s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 1.7rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      color: #2e2e2e;
+      letter-spacing: 6px;
+      transition: color 0.3s;
+    }
+    .marquee-track span i {
+      margin: 0 1.2rem;
+      color: #3d3d3d;
+      font-size: 1.4rem;
+    }
+    .marquee-track:hover span {
+      color: #6b6b6b;
+    }
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* FEATURED collection cards */
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 500;
+      border-bottom: 1px solid #1f1f1f;
+      padding-bottom: 0.5rem;
+      margin-bottom: 3rem;
+      letter-spacing: -0.5px;
+      animation: fadeGlow 5s infinite;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .product-card {
+      background: #0a0a0a;
+      border: 1px solid #222;
+      padding: 2rem 1rem 1.5rem 1rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      animation: cardAppear 0.8s backwards;
+      animation-delay: calc(0.1s * var(--card-order));
+    }
+    @keyframes cardAppear {
+      0% { opacity: 0; transform: translateY(80px) scale(0.9); filter: blur(8px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    .product-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(80,80,80,0.2), transparent);
+      transition: left 0.9s;
+    }
+    .product-card:hover {
+      border-color: #4f4f4f;
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 30px 40px -20px #0a0a0a, 0 0 0 1px #3a3a3a;
+    }
+    .product-card:hover::after {
+      left: 50%;
+    }
+    .product-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 1px solid #2a2a2a;
+      transition: all 0.5s;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+      border-color: #6a6a6a;
+    }
+    .product-title {
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .product-price {
+      color: #5f5f5f;
+      font-size: 1.1rem;
+      margin: 1rem 0 1.2rem 0;
+    }
+    .product-card .btn-mini {
+      background: transparent;
+      border: 1px solid #3a3a3a;
+      padding: 0.5rem 1.8rem;
+      color: #aaa;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .product-card .btn-mini:hover {
+      background: #1e1e1e;
+      color: white;
+    }
+
+    /* LOOKBOOK — interactive grid */
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 4rem 0;
+    }
+    .look-item {
+      aspect-ratio: 3 / 4;
+      background: #111;
+      border: 1px solid #242424;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: 0.4s;
+      position: relative;
+      animation: floatVertical 6s infinite;
+      animation-delay: calc(0.2s * var(--look-i));
+      overflow: hidden;
+    }
+    .look-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s;
+      opacity: 0.9;
+    }
+    .look-item:hover img {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    .look-item span {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background: rgba(0,0,0,0.8);
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      color: #ffffff;
+      letter-spacing: 2px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+    .look-item:hover span {
+      transform: translateY(0);
+    }
+    .look-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, #252525, #000);
+      opacity: 0;
+      transition: opacity 0.6s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .look-item:hover::before {
+      opacity: 0.3;
+    }
+
+    /* parallax banner */
+    .parallax-banner {
+      margin: 7rem 0;
+      padding: 6rem 0;
+      background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('Baggyhoodie.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      border-top: 2px solid #202020;
+      border-bottom: 2px solid #202020;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .parallax-banner h2 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+      letter-spacing: 12px;
+      animation: fadeGlow 3s infinite;
+    }
+    .parallax-banner p {
+      color: #cccccc;
+      font-size: 1.4rem;
+    }
+
+    /* footer with hover effects */
+    .footer {
+      margin-top: 6rem;
+      border-top: 1px solid #1b1b1b;
+      padding: 3rem 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .footer a {
+      color: #5f5f5f;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .footer a:hover {
+      color: #dddddd;
+      transform: translateX(6px);
+    }
+    .social-icons i {
+      font-size: 1.6rem;
+      margin: 0 0.8rem;
+      color: #3d3d3d;
+      transition: all 0.3s;
+    }
+    .social-icons i:hover {
+      color: white;
+      transform: scale(1.2) rotate(3deg);
+    }
+
+    /* extra micro-animations and details */
+    .glow-dot {
+      width: 6px;
+      height: 6px;
+      background: #6a6a6a;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 6px;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0% { opacity: 0.2; box-shadow: 0 0 0 0 #6a6a6a; }
+      50% { opacity: 1; box-shadow: 0 0 12px 2px #c0c0c0; }
+      100% { opacity: 0.2; box-shadow: 0 0 0 0 #6a6a6a; }
+    }
+
+    /* responsiveness & decorative lines */
+    .line-art {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #3d3d3d, transparent);
+      margin: 2rem 0;
+    }
+
+    /* newsletter section */
+    .newsletter {
+      padding: 4rem 0;
+      text-align: center;
+      border: 1px solid #202020;
+      background: #060606;
+    }
+    .newsletter-input {
+      max-width: 400px;
+      margin: 1.5rem auto;
+      display: flex;
+    }
+    .newsletter-input input {
+      background: #111;
+      border: 1px solid #2e2e2e;
+      padding: 1rem;
+      width: 70%;
+      color: #ccc;
+      outline: none;
+    }
+    .newsletter-input input:focus {
+      border-color: #6a6a6a;
+    }
+    .newsletter-input button {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-left: 0;
+      color: #aaa;
+      padding: 0 2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .newsletter-input button:hover {
+      background: #2a2a2a;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-bg"></div>
+  <div class="site-wrapper">
+
+    <!-- header -->
+    <header class="header">
+      <div class="logo">VITTI <span>// STREETWEAR</span></div>
+      <nav class="nav">
+        <ul>
+          <li><a href="#">LOOKBOOK</a></li>
+          <li><a href="#">DROP</a></li>
+          <li><a href="#">ARCHIVE</a></li>
+          <li><a href="#">ACCESS</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- hero section with Baggyhoodie image -->
+    <section class="hero">
+      <div>
+        <h1>
+          <span class="hero-line"><span style="--i:1;">BLACK </span></span>
+          <span class="hero-line"><span style="--i:2;">AESTHETIC </span></span>
+          <span class="hero-line hero-glow"><span style="--i:3;">VITTI </span></span>
+        </h1>
+        <div class="hero-desc">where concrete meets couture · limited editions · XXIV</div>
+        <div class="hero-cta">
+          <a href="#" class="btn">SHOP NOW</a>
+          <a href="#" class="btn btn-outline">DISCOVER</a>
+        </div>
+        <div style="margin-top: 2.5rem; display: flex; gap: 1rem; font-size: 0.9rem; color: #333;">
+          <span><i class="fas fa-skull" style="margin-right: 6px;"></i> 24/7 DROP</span>
+          <span class="glow-dot"></span>
+          <span><i class="fas fa-bolt"></i> 1 OF 1</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-box" style="background-image: url('Baggyhoodie.jpg');">
+          <i class="fas fa-crown"></i>
+          <i class="fas fa-dragon" style="font-size: 2.8rem;"></i>
+          <div class="mini-text">VITTI EXCLUSIVE</div>
+          <i class="fas fa-tshirt"></i>
+          <div style="border-top: 1px solid rgba(255,255,255,0.3); width: 60%; margin: 0.5rem;"></div>
+          <span style="color:#ffffff;">est.2025</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- infinite marquee -->
+    <div class="marquee-section">
+      <div class="marquee-track">
+        <!-- repeated twice for seamless loop -->
+        <span>LIM·ITED <i class="fas fa-times"></i> </span>
+        <span>STREET·WEAR <i class="fas fa-moon"></i> </span>
+        <span>VITTI CODE <i class="fas fa-barcode"></i> </span>
+        <span>BLACK LABEL <i class="fas fa-gem"></i> </span>
+        <span>LIM·ITED <i class="fas fa-times"></i> </span>
+        <span>STREET·WEAR <i class="fas fa-moon"></i> </span>
+        <span>VITTI CODE <i class="fas fa-barcode"></i> </span>
+        <span>BLACK LABEL <i class="fas fa-gem"></i> </span>
+      </div>
+    </div>
+
+    <!-- featured collection with Baggyhoodie and Fullfit images -->
+    <h2 class="section-title">/FEATURED DROP</h2>
+    <div class="card-grid">
+      <!-- card 1 - Baggyhoodie -->
+      <div class="product-card" style="--card-order:1;">
+        <img src="Baggyhoodie.jpg" alt="Oversized Baggy Hoodie" class="product-image">
+        <div class="product-title">BAGGY HOODIE</div>
+        <div class="product-price">¥ 240</div>
+        <button class="btn-mini">⟡ view</button>
+      </div>
+      <!-- card 2 - Fullfit -->
+      <div class="product-card" style="--card-order:2;">
+        <img src="Fullfit.jpg" alt="Complete Fullfit Ensemble" class="product-image">
+        <div class="product-title">FULLFIT SET</div>
+        <div class="product-price">¥ 420</div>
+        <button class="btn-mini">⟡ view</button>
+      </div>
+      <!-- card 3 - Baggyhoodie alternate -->
+      <div class="product-card" style="--card-order:3;">
+        <img src="Baggyhoodie.jpg" alt="Black Baggy Hoodie Detail" class="product-image">
+        <div class="product-title">BAGGY HOODIE BLACK</div>
+        <div class="product-price">¥ 260</div>
+        <button class="btn-mini">⟡ view</button>
+      </div>
+      <!-- card 4 - Fullfit alternate -->
+      <div class="product-card" style="--card-order:4;">
+        <img src="Fullfit.jpg" alt="Fullfit Technical Wear" class="product-image">
+        <div class="product-title">FULLFIT TECH</div>
+        <div class="product-price">¥ 480</div>
+        <button class="btn-mini">⟡ view</button>
+      </div>
+    </div>
+
+    <!-- lookbook interactive grid with both images -->
+    <h2 class="section-title">/LOOKBOOK · MMXXV</h2>
+    <div class="lookbook-grid">
+      <div class="look-item" style="--look-i:1;">
+        <img src="Baggyhoodie.jpg" alt="Urban look 01">
+        <span>URBAN 01</span>
+      </div>
+      <div class="look-item" style="--look-i:2;">
+        <img src="Fullfit.jpg" alt="Goth look 02">
+        <span>GOTH 02</span>
+      </div>
+      <div class="look-item" style="--look-i:3;">
+        <img src="Baggyhoodie.jpg" alt="Night look 03">
+        <span>NIGHT 03</span>
+      </div>
+      <div class="look-item" style="--look-i:4;">
+        <img src="Fullfit.jpg" alt="Brutal look 04">
+        <span>BRUTAL 04</span>
+      </div>
+      <div class="look-item" style="--look-i:5;">
+        <img src="Baggyhoodie.jpg" alt="Myth look 05">
+        <span>MYTH 05</span>
+      </div>
+      <div class="look-item" style="--look-i:6;">
+        <img src="Fullfit.jpg" alt="Tech look 06">
+        <span>TECH 06</span>
+      </div>
+      <div class="look-item" style="--look-i:7;">
+        <img src="Baggyhoodie.jpg" alt="Apex look 07">
+        <span>APEX 07</span>
+      </div>
+      <div class="look-item" style="--look-i:8;">
+        <img src="Fullfit.jpg" alt="Void look 08">
+        <span>VOID 08</span>
+      </div>
+    </div>
+
+    <!-- parallax banner with Baggyhoodie background -->
+    <div class="parallax-banner">
+      <h2>VITTI//STREET</h2>
+      <p><i class="fas fa-bolt" style="color: #cccccc;"></i> ETERNAL BLACK <i class="fas fa-bolt" style="color: #cccccc;"></i></p>
+      <div style="display: flex; gap: 0.8rem; font-size: 2rem; margin-top: 1rem;">
+        <i class="fas fa-circle" style="color:#ffffff; animation: pulseDot 3s infinite;"></i>
+        <i class="fas fa-circle" style="color:#ffffff; animation: pulseDot 5s infinite;"></i>
+        <i class="fas fa-circle" style="color:#ffffff; animation: pulseDot 2.3s infinite;"></i>
+      </div>
+    </div>
+
+    <!-- extra collection row (more cards with both images) -->
+    <div style="margin-top: 4rem;">
+      <div style="display: flex; gap: 1rem; align-items: baseline;">
+        <h2 class="section-title" style="flex:1;">/ACCESS</h2>
+        <span style="color:#3d3d3d;"><i class="fas fa-arrow-trend-down"></i> limited units</span>
+      </div>
+      <div class="card-grid">
+        <div class="product-card" style="--card-order:5;">
+          <img src="Baggyhoodie.jpg" alt="Baggy Hoodie Access" class="product-image">
+          <div class="product-title">BAGGY HOODIE</div>
+          <div class="product-price">¥ 240</div>
+          <button class="btn-mini">pre</button>
+        </div>
+        <div class="product-card" style="--card-order:6;">
+          <img src="Fullfit.jpg" alt="Fullfit Collection" class="product-image">
+          <div class="product-title">FULLFIT SET</div>
+          <div class="product-price">¥ 420</div>
+          <button class="btn-mini">pre</button>
+        </div>
+        <div class="product-card" style="--card-order:7;">
+          <img src="Baggyhoodie.jpg" alt="Limited Hoodie" class="product-image">
+          <div class="product-title">BAGGY LIMITED</div>
+          <div class="product-price">¥ 299</div>
+          <button class="btn-mini">pre</button>
+        </div>
+        <div class="product-card" style="--card-order:8;">
+          <img src="Fullfit.jpg" alt="Fullfit Premium" class="product-image">
+          <div class="product-title">FULLFIT PREM</div>
+          <div class="product-price">¥ 520</div>
+          <button class="btn-mini">pre</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- line art -->
+    <div class="line-art"></div>
+
+    <!-- newsletter section -->
+    <div class="newsletter">
+      <i class="fas fa-envelope" style="font-size: 3rem; color: #444; margin-bottom: 1rem; animation: floatVertical 4s infinite;"></i>
+      <h3 style="font-weight: 300; letter-spacing: 3px;">JOIN THE <strong style="color:#aaa;">BLACKLIST</strong></h3>
+      <div class="newsletter-input">
+        <input type="email" placeholder="vitti@void.com">
+        <button>⟶</button>
+      </div>
+      <div style="display: flex; gap: 1rem; justify-content: center; color: #5f5f5f;">
+        <i class="fas fa-dragon"></i> <i class="fas fa-skull"></i> <i class="fas fa-hand-peace"></i>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <span class="logo" style="font-size:1.8rem;">VITTI</span>
+        <span>© 2025 · black aesthetic archive</span>
+      </div>
+      <div>
+        <h4 style="color: #555; margin-bottom: 1rem;">INDEX</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="#">LOOKBOOK</a>
+          <a href="#">SHIPPING</a>
+          <a href="#">RETURNS</a>
+        </div>
+      </div>
+      <div class="social-icons">
+        <h4 style="color: #555; margin-bottom: 1rem;">FOLLOW</h4>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-x-twitter"></i>
+        <i class="fab fa-tiktok"></i>
+        <i class="fab fa-discord"></i>
+      </div>
+    </footer>
+
+    <!-- decorative dots -->
+    <div style="display: flex; justify-content: center; gap: 0.3rem; margin: 3rem 0 1rem;">
+      <span class="glow-dot"></span><span class="glow-dot" style="animation-delay:0.5s;"></span><span class="glow-dot" style="animation-delay:1s;"></span>
+    </div>
+
+  </div> <!-- site wrapper end -->
+
+  <!-- script for dynamic year -->
+  <script>
+    (function() {
+      console.log("VITTI STREETWEAR · black aesthetic");
+      // Add subtle hover effects for images
+      const images = document.querySelectorAll('.product-image, .look-item img');
+      images.forEach(img => {
+        img.addEventListener('mouseenter', () => {
+          img.style.filter = 'brightness(1.1) contrast(1.1)';
+        });
+        img.addEventListener('mouseleave', () => {
+          img.style.filter = 'none';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
